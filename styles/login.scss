@@ -2,14 +2,10 @@
   background: $main-bg;
   width: 100vw;
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center-screen;
 
   &__button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-center-screen;
     width: 16rem;
     height: 4rem;
     background: $bg-dark2;
