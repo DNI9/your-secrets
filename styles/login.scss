@@ -1,0 +1,30 @@
+.login {
+  background: $main-bg;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16rem;
+    height: 4rem;
+    background: $bg-dark2;
+    box-shadow: 5px 9px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    cursor: pointer;
+
+    img {
+      height: 1.8rem;
+      margin-right: 0.5rem;
+    }
+
+    h3 {
+      color: $light;
+      letter-spacing: 0.1rem;
+    }
+  }
+}
