@@ -1,5 +1,16 @@
-// import Head from 'next/head'
+import Head from 'next/head';
 
 export default function Home() {
-  return <div>Hello Next</div>;
+  return (
+    <div>
+      <Head>
+        <title>Create Next App</title>
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
+
+      <div>
+        <h1>Your Secret Home</h1>
+      </div>
+    </div>
+  );
 }
