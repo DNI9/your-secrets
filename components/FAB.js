@@ -1,6 +1,6 @@
-const FAB = () => {
+const FAB = ({onclick, isOpen}) => {
   return (
-    <div className='FAB'>
+    <div disabled={isOpen} className='FAB' onClick={onclick}>
       <img src='/add.svg' alt='FAB icon' />
     </div>
   );

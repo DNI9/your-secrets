@@ -20,14 +20,23 @@ a {
 
 // UTILS
 textarea,
+input,
 button {
   outline: none;
   border: none;
-  color: $light;
+}
+input {
+  padding: 0.8rem 0.5rem;
+  font-size: 1rem;
 }
 button {
   font-family: inherit;
   cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
 }
 .fixed-footer {
   position: fixed;
