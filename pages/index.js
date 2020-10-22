@@ -7,21 +7,30 @@ import {useAuth} from 'context/AuthContext';
 import {useRouter} from 'next/router';
 import {useRef, useState} from 'react';
 import Modal from 'components/Modal';
+import {db, now} from 'config/firebase';
 
 export default function Home() {
-  const isSecretEmpty = true; // TODO
   const {currentUser, loading} = useAuth();
   const router = useRouter();
   const [isOpen, setModalOpen] = useState(false);
+  const secretRef = useRef();
 
   if (!loading && currentUser === null) {
     router.push('/login');
   }
 
-  const secretRef = useRef();
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(secretRef.current.value);
+    const collectionRef = db.collection('secrets');
+    collectionRef
+      .add({
+        secretName: secretRef.current.value.trim(),
+        uid: currentUser.uid,
+        messages: [],
+        createdAt: now,
+      })
+      .then(doc => console.log('Added successfully'))
+      .catch(err => console.error(err.message));
   };
 
   return (
