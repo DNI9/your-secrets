@@ -1,13 +1,18 @@
 import Head from 'next/head';
 import {useRouter} from 'next/router';
+import {useAuth} from '../context/AuthContext';
 
 const login = () => {
+  const {signInWithGoogle} = useAuth();
   const router = useRouter();
-  const handleClick = () => {
-    console.log('well hello');
-    router.push('/');
+  const handleClick = async () => {
+    try {
+      const res = await signInWithGoogle();
+      router.push('/');
+    } catch (err) {
+      console.log(err.message);
+    }
   };
-
   return (
     <>
       <Head>
