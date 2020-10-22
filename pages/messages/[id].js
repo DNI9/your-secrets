@@ -3,6 +3,12 @@ import {useRouter} from 'next/router';
 
 const AddMessage = () => {
   const router = useRouter();
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log('Submit message');
+  };
+
   return (
     <>
       <Head>
@@ -16,7 +22,7 @@ const AddMessage = () => {
           <div>to Indrajit</div>
         </div>
         <div className='message__form'>
-          <form>
+          <form onSubmit={handleSubmit}>
             <textarea
               placeholder='Write your message here'
               name='message'
