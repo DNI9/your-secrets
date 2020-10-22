@@ -9,7 +9,7 @@ const login = () => {
   };
 
   return (
-    <div>
+    <>
       <Head>
         <title>Login to Your secrets</title>
         <link rel='icon' href='/favicon.ico' />
@@ -21,7 +21,7 @@ const login = () => {
           <h3>Login with Google</h3>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
