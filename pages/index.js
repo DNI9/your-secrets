@@ -7,12 +7,14 @@ import {useAuth} from 'context/AuthContext';
 import {useRouter} from 'next/router';
 import {useRef, useState} from 'react';
 import Modal from 'components/Modal';
+import useFirestore from 'hooks/useFirestore';
 import {db, now} from 'config/firebase';
 
 export default function Home() {
   const {currentUser, loading} = useAuth();
   const router = useRouter();
   const [isOpen, setModalOpen] = useState(false);
+  const {docs} = useFirestore('secrets');
   const secretRef = useRef();
 
   if (!loading && currentUser === null) {
@@ -40,10 +42,16 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar title='Secrets' showUserAvatar />
-      {!isSecretEmpty && <EmptyMessage message='No secrets there' />}
+      {docs.length === 0 && <EmptyMessage message='No secrets here' />}
       <div className='card-container'>
-        <SecretCard name='New secret' noOfMessages='12' />
-        <SecretCard name='Another secret' noOfMessages='5' />
+        {docs &&
+          docs.map(doc => (
+            <SecretCard
+              key={doc.id}
+              name={doc.secretName}
+              noOfMessages={doc.messages.length}
+            />
+          ))}
       </div>
       <Modal
         isOpen={isOpen}
