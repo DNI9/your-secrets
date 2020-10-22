@@ -1,5 +1,4 @@
 // FAB
-
 .FAB {
   @include flex-center-screen;
   background: rgba(104, 104, 243, 0.22);
@@ -10,7 +9,7 @@
   bottom: 1rem;
   right: 1rem;
   cursor: pointer;
-
+  z-index: 1;
   &:hover {
     box-shadow: 3px 5px 20px rgba(104, 104, 243, 0.22);
   }
@@ -43,6 +42,51 @@
 
     img {
       height: 1.2rem;
+    }
+  }
+}
+
+// CARD
+.card {
+  @include flex-center-screen;
+  justify-content: flex-start;
+  padding: 0 0.8rem;
+  width: 100%;
+  background: $bg-dark2;
+  border-radius: 5px;
+
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  &__icon {
+    margin-right: 0.8rem;
+    @include flex-center-screen;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    background: rgba(104, 104, 243, 0.22);
+
+    img {
+      height: 1.5rem;
+    }
+  }
+  &__title {
+    h2 {
+      font-size: 1.2rem;
+      line-height: 0.8rem;
+    }
+    p {
+      opacity: 0.6;
+    }
+  }
+  &__right-icon {
+    margin-left: auto;
+    cursor: pointer;
+    transition: transform 0.5s ease-in-out;
+
+    &:hover {
+      transform: scale(1.2);
     }
   }
 }

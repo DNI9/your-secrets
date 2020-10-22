@@ -1,3 +1,4 @@
+import SecretCard from 'components/SecretCard';
 import EmptyMessage from 'components/EmptyMessage';
 import FAB from 'components/FAB';
 import Navbar from 'components/Navbar';
@@ -12,7 +13,11 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar title='Secrets' showUserAvatar />
-      {isSecretEmpty && <EmptyMessage message='No secrets there' />}
+      {!isSecretEmpty && <EmptyMessage message='No secrets there' />}
+      <div className='card-container'>
+        <SecretCard name='New secret' noOfMessages='12' />
+        <SecretCard name='Another secret' noOfMessages='5' />
+      </div>
       <FAB />
     </div>
   );
