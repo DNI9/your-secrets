@@ -1,0 +1,48 @@
+// FAB
+
+.FAB {
+  @include flex-center-screen;
+  background: rgba(104, 104, 243, 0.22);
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 3px 5px 20px rgba(104, 104, 243, 0.22);
+  }
+
+  img {
+    height: 1.8rem;
+  }
+}
+
+// NAVBAR
+.navbar {
+  height: 4rem;
+  width: 100vw;
+  @include flex-center-screen;
+  justify-content: flex-start;
+  padding: 0 1rem;
+  &__title {
+    font-size: 1.6rem;
+    letter-spacing: 0.05rem;
+    margin-right: auto;
+  }
+
+  &__user-avatar {
+    @include flex-center-screen;
+    cursor: pointer;
+    height: 2.2rem;
+    width: 2.2rem;
+    border-radius: 50%;
+    background: rgba(104, 104, 243, 0.22);
+
+    img {
+      height: 1.2rem;
+    }
+  }
+}
