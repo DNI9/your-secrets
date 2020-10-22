@@ -31,6 +31,7 @@ export default function AuthProvider({children}) {
   }, []);
 
   const value = {
+    loading,
     currentUser,
     logout,
     signInWithGoogle,

@@ -3,16 +3,20 @@ import {useRouter} from 'next/router';
 import {useAuth} from '../context/AuthContext';
 
 const login = () => {
-  const {signInWithGoogle} = useAuth();
+  const {signInWithGoogle, currentUser, loading} = useAuth();
   const router = useRouter();
   const handleClick = async () => {
     try {
-      const res = await signInWithGoogle();
+      await signInWithGoogle();
       router.push('/');
     } catch (err) {
       console.log(err.message);
     }
   };
+
+  if (currentUser) {
+    router.push('/');
+  }
   return (
     <>
       <Head>
@@ -21,7 +25,7 @@ const login = () => {
       </Head>
 
       <div className='login'>
-        <div className='login__button' onClick={handleClick}>
+        <div disabled={loading} className='login__button' onClick={handleClick}>
           <img src='/google-icon.svg' alt='google icon svg' />
           <h3>Login with Google</h3>
         </div>
