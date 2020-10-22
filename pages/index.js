@@ -1,8 +1,10 @@
+import EmptyMessage from 'components/EmptyMessage';
 import FAB from 'components/FAB';
 import Navbar from 'components/Navbar';
 import Head from 'next/head';
 
 export default function Home() {
+  const isSecretEmpty = true; // TODO
   return (
     <div>
       <Head>
@@ -10,9 +12,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar title='Secrets' showUserAvatar />
-      <div>
-        <h1>Your Secret Home</h1>
-      </div>
+      {isSecretEmpty && <EmptyMessage message='No secrets there' />}
       <FAB />
     </div>
   );
