@@ -1,0 +1,58 @@
+.message {
+  @include flex-center-screen;
+  background: $main-bg;
+  width: 100vw;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 1.5rem;
+
+  &__title {
+    margin: 1rem 0;
+    span {
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+    div {
+      font-size: 4rem;
+    }
+  }
+
+  &__form {
+    textarea {
+      resize: none;
+      width: 100%;
+      max-width: 100%;
+      max-height: 10rem;
+      font-size: 1.2rem;
+      background: $bg-dark2;
+      font-family: inherit;
+      padding: 0.5rem;
+
+      &::placeholder {
+        color: inherit;
+        opacity: 0.5;
+      }
+    }
+
+    button {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.05rem;
+      margin-top: 0.5rem;
+      background: linear-gradient(98.25deg, #6a6aff -12.26%, #3f69ff 108.73%);
+      border-radius: 3px;
+      padding: 0.8rem 1.8rem;
+    }
+  }
+
+  .fixed-footer {
+    span {
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1.2rem;
+      letter-spacing: 0.05rem;
+      color: $primary-color;
+    }
+  }
+}

@@ -4,6 +4,9 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+  background: $main-bg;
+  color: $light;
 }
 
 a {
@@ -13,4 +16,21 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+// UTILS
+textarea,
+button {
+  outline: none;
+  border: none;
+  color: $light;
+}
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  margin: 1rem 0;
 }
