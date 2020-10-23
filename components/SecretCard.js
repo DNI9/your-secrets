@@ -4,7 +4,7 @@ import {motion} from 'framer-motion';
 const SecretCard = ({name, noOfMessages, id}) => {
   const router = useRouter();
   const onCardClick = () => {
-    router.push(`/secrets/${id}`);
+    router.push('/secrets/[secretID]', `/secrets/${id}`);
   };
 
   return (
