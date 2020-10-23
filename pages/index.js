@@ -8,7 +8,7 @@ import {useRouter} from 'next/router';
 import {useRef, useState} from 'react';
 import Modal from 'components/Modal';
 import useFirestore from 'hooks/useFirestore';
-import {db, now} from 'config/firebase';
+import {db, timestamp} from 'config/firebase';
 
 export default function Home() {
   const {currentUser, loading} = useAuth();
@@ -29,7 +29,7 @@ export default function Home() {
         secretName: secretRef.current.value.trim(),
         uid: currentUser.uid,
         messages: [],
-        createdAt: now,
+        createdAt: timestamp(),
       })
       .then(doc => console.log('Added successfully'))
       .catch(err => console.error(err.message));
@@ -48,6 +48,7 @@ export default function Home() {
           docs.map(doc => (
             <SecretCard
               key={doc.id}
+              id={doc.id}
               name={doc.secretName}
               noOfMessages={doc.messages.length}
             />
