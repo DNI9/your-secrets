@@ -26,6 +26,7 @@ export default function Home() {
     const collectionRef = db.collection('secrets');
     collectionRef
       .add({
+        username: currentUser.displayName,
         secretName: secretRef.current.value.trim(),
         uid: currentUser.uid,
         messages: [],
