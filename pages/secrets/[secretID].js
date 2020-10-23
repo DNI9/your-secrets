@@ -4,9 +4,11 @@ import Navbar from 'components/Navbar';
 import Head from 'next/head';
 import {getSingleDoc, getAllDocs} from 'utils/getDocs';
 import {format} from 'timeago.js';
+import useMessages from 'hooks/useMessages';
 
-const Secret = ({secretData}) => {
-  const {messages} = secretData;
+const Secret = ({id}) => {
+  const docs = useMessages(id);
+  console.log(docs);
   return (
     <div>
       <Head>
@@ -14,14 +16,14 @@ const Secret = ({secretData}) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar title='Messages' />
-      {messages.length === 0 && <EmptyMessage message='No messages yet' />}
+      {docs.length === 0 && <EmptyMessage message='No messages yet' />}
       <div className='card-container'>
-        {messages.map(({msg, createdAt}) => {
+        {docs.map(({id, msg, createdAt}) => {
           return (
             <MessageCard
-              key={createdAt}
+              key={id}
               message={msg}
-              timePassed={format(createdAt)}
+              timePassed={format(createdAt.toDate())}
             />
           );
         })}
@@ -47,14 +49,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params}) {
-  const secretData = await getSingleDoc(params.secretID);
   return {
-    props: {
-      secretData: {
-        ...secretData,
-        createdAt: `${secretData.createdAt.toDate()}`,
-      },
-    },
+    props: {id: params.secretID},
   };
 }
 

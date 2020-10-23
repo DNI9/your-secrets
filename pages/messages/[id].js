@@ -12,13 +12,16 @@ const AddMessage = ({secretData}) => {
   const handleSubmit = async e => {
     e.preventDefault();
     const msg = msgRef.current.value.trim();
-    const docRef = db.doc(`secrets/${id}`);
-    if (msg) {
-      await docRef.update({
-        messages: fieldValue.arrayUnion({msg, createdAt: Date.now()}),
-      });
-      msgRef.current.value = '';
-    }
+    await db.collection('messages').add({
+      msg,
+      secretID: id,
+      createdAt: now,
+    });
+
+    // increment msgCount for index page
+    await db.doc(`secrets/${id}`).update({
+      msgCount: fieldValue.increment(1),
+    });
   };
 
   return (

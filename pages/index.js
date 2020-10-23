@@ -29,7 +29,7 @@ export default function Home() {
         username: currentUser.displayName,
         secretName: secretRef.current.value.trim(),
         uid: currentUser.uid,
-        messages: [],
+        msgCount: 0,
         createdAt: now,
       })
       .then(doc => console.log('Added successfully'))
@@ -54,7 +54,7 @@ export default function Home() {
               key={doc.id}
               id={doc.id}
               name={doc.secretName}
-              noOfMessages={doc.messages.length}
+              noOfMessages={doc.msgCount}
             />
           ))}
       </div>
