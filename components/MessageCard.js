@@ -1,10 +1,12 @@
+import {motion} from 'framer-motion';
+
 const MessageCard = ({message, timePassed}) => {
   return (
     <div className='card'>
-      <div className='message-card card__title'>
+      <motion.div layout className='message-card card__title'>
         <p>{message}</p>
         <p>{timePassed}</p>
-      </div>
+      </motion.div>
     </div>
   );
 };

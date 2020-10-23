@@ -1,4 +1,5 @@
 import {useRouter} from 'next/router';
+import {motion} from 'framer-motion';
 
 const SecretCard = ({name, noOfMessages, id}) => {
   const router = useRouter();
@@ -7,7 +8,7 @@ const SecretCard = ({name, noOfMessages, id}) => {
   };
 
   return (
-    <div className='card'>
+    <motion.div layout transition={{duration: 0.5}} className='card'>
       <div className='card__icon'>
         <img src='/lock.svg' />
       </div>
@@ -18,7 +19,7 @@ const SecretCard = ({name, noOfMessages, id}) => {
       <div className='card__right-icon'>
         <img src='share.svg' />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
