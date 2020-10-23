@@ -9,6 +9,7 @@ import {useRef, useState} from 'react';
 import Modal from 'components/Modal';
 import useFirestore from 'hooks/useFirestore';
 import {db, timestamp} from 'config/firebase';
+import Spinner from 'components/Spinner';
 
 export default function Home() {
   const {currentUser, loading} = useAuth();
@@ -42,7 +43,10 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar title='Secrets' showUserAvatar />
-      {docs.length === 0 && <EmptyMessage message='No secrets here' />}
+      {!loading && docs.length === 0 && (
+        <EmptyMessage message='No secrets here' />
+      )}
+      {loading && <Spinner />}
       <div className='card-container'>
         {docs &&
           docs.map(doc => (
