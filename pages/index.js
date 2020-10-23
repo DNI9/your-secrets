@@ -15,13 +15,12 @@ export default function Home() {
   const {currentUser, loading} = useAuth();
   const router = useRouter();
   const [isOpen, setModalOpen] = useState(false);
-  const {docs} = useFirestore('secrets');
   const secretRef = useRef();
+  let docs = useFirestore('secrets', currentUser?.uid);
 
   if (!loading && currentUser === null) {
     router.push('/login');
   }
-
   const handleSubmit = e => {
     e.preventDefault();
     const collectionRef = db.collection('secrets');

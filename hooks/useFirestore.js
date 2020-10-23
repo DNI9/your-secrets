@@ -1,12 +1,12 @@
 import {useState, useEffect} from 'react';
 import {db} from '../config/firebase';
 
-const useFirestore = collectionName => {
+const useFirestore = (collectionName, uid) => {
   const [docs, setDocs] = useState([]);
-
   useEffect(() => {
     const unSub = db
       .collection(collectionName)
+      .where('uid', '==', uid || '')
       .orderBy('createdAt', 'desc')
       .onSnapshot(snap => {
         let documents = [];
@@ -16,9 +16,9 @@ const useFirestore = collectionName => {
         setDocs(documents);
       });
     return () => unSub();
-  }, [collectionName]);
+  }, [collectionName, uid]);
 
-  return {docs};
+  return docs;
 };
 
 export default useFirestore;
