@@ -1,12 +1,24 @@
+import {db, fieldValue, now} from 'config/firebase';
 import Head from 'next/head';
 import {useRouter} from 'next/router';
+import {useRef} from 'react';
+import {getAllDocs, getSingleDoc} from 'utils/getDocs';
 
-const AddMessage = () => {
+const AddMessage = ({secretData}) => {
   const router = useRouter();
+  const msgRef = useRef();
+  const {username, id} = secretData;
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    console.log('Submit message');
+    const msg = msgRef.current.value.trim();
+    const docRef = db.doc(`secrets/${id}`);
+    if (msg) {
+      await docRef.update({
+        messages: fieldValue.arrayUnion({msg, createdAt: Date.now()}),
+      });
+      msgRef.current.value = '';
+    }
   };
 
   return (
@@ -19,11 +31,12 @@ const AddMessage = () => {
       <div className='message'>
         <div className='message__title'>
           <span>Write something</span>
-          <div>to Indrajit</div>
+          <div>to {username.split(' ')[0]}</div>
         </div>
         <div className='message__form'>
           <form onSubmit={handleSubmit}>
             <textarea
+              ref={msgRef}
               placeholder='Write your message here'
               name='message'
               id='message'
@@ -40,5 +53,33 @@ const AddMessage = () => {
     </>
   );
 };
+
+export async function getStaticPaths() {
+  const docs = await getAllDocs('secrets');
+  const paths = docs.map(doc => {
+    return {
+      params: {
+        id: doc.id,
+      },
+    };
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({params}) {
+  const secretData = await getSingleDoc(params.id);
+  return {
+    props: {
+      secretData: {
+        ...secretData,
+        createdAt: `${secretData.createdAt.toDate()}`,
+      },
+    },
+  };
+}
 
 export default AddMessage;
