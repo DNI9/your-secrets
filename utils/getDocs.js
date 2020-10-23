@@ -15,4 +15,10 @@ const getAllDocs = async collectionName => {
   return documents;
 };
 
-export {getSingleDoc, getAllDocs};
+const isSecretOwner = async (secretID, uid) => {
+  const docRef = db.doc(`secrets/${secretID}`);
+  const doc = await docRef.get();
+  return doc.data().uid === uid;
+};
+
+export {getSingleDoc, getAllDocs, isSecretOwner};
