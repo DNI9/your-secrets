@@ -1,10 +1,9 @@
 import {useRouter} from 'next/router';
 
-const SecretCard = ({name, noOfMessages}) => {
+const SecretCard = ({name, noOfMessages, id}) => {
   const router = useRouter();
   const onCardClick = () => {
-    router.push('/secrets/1');
-    console.log('Card clicked');
+    router.push(`/secrets/${id}`);
   };
 
   return (
