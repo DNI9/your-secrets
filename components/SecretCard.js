@@ -1,12 +1,7 @@
-// import {useRouter} from 'next/router';
 import {motion} from 'framer-motion';
 import Link from 'next/link';
 
 const SecretCard = ({name, noOfMessages, id}) => {
-  // const router = useRouter();
-  // const onCardClick = () => {
-  //   router.push('/secrets/[secretID]', `/secrets/${id}`);
-  // };
   return (
     <motion.div layout transition={{duration: 0.5}} className='card'>
       <div className='card__icon'>

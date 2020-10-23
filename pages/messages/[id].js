@@ -1,16 +1,20 @@
 import {db, fieldValue, now} from 'config/firebase';
 import {useAuth} from 'context/AuthContext';
+import useSingleDoc from 'hooks/useSingleDoc';
 import Head from 'next/head';
 import {useRouter} from 'next/router';
-import {useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import {getAllDocs, getSingleDoc} from 'utils/getDocs';
 
 // This route is to let other user create message
-const AddMessage = ({secretData}) => {
+const AddMessage = ({id}) => {
   const router = useRouter();
   const msgRef = useRef();
   const {currentUser} = useAuth();
-  const {username, id, uid} = secretData;
+  const doc = useSingleDoc(id);
+  if (doc === null) router.push('/');
+  if (!doc) return <div>loading...</div>;
+  const {uid, username} = doc;
 
   // user can't send message to his own secret
   if (currentUser && uid === currentUser.uid) router.push('/');
@@ -79,18 +83,14 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
 export async function getStaticProps({params}) {
-  const secretData = await getSingleDoc(params.id);
   return {
     props: {
-      secretData: {
-        ...secretData,
-        createdAt: `${secretData.createdAt.toDate()}`,
-      },
+      id: params.id,
     },
   };
 }
