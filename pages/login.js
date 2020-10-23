@@ -10,7 +10,7 @@ const login = () => {
       await signInWithGoogle();
       router.push('/');
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
     }
   };
 
