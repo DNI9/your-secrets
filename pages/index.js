@@ -21,22 +21,24 @@ export default function Home() {
   if (!loading && currentUser === null) {
     router.push('/login');
   }
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    const collectionRef = db.collection('secrets');
-    collectionRef
-      .add({
-        username: currentUser.displayName,
-        secretName: secretRef.current.value.trim(),
-        uid: currentUser.uid,
-        msgCount: 0,
-        createdAt: now(),
-      })
-      .then(() => {
-        secretRef.current.value = '';
-        setModalOpen(false);
-      })
-      .catch(err => console.error(err.message));
+    const secretName = secretRef.current.value.trim();
+    if (secretName) {
+      try {
+        await db.collection('secrets').add({
+          username: currentUser.displayName,
+          secretName,
+          uid: currentUser.uid,
+          msgCount: 0,
+          createdAt: now(),
+        });
+      } catch (err) {
+        console.error(err.message);
+      }
+      setModalOpen(false);
+    }
+    secretRef.current.value = '';
   };
 
   return (

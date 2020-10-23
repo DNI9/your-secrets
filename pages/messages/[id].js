@@ -1,6 +1,5 @@
 import {db, fieldValue, now} from 'config/firebase';
 import {useAuth} from 'context/AuthContext';
-import {route} from 'next/dist/next-server/server/router';
 import Head from 'next/head';
 import {useRouter} from 'next/router';
 import {useRef} from 'react';
@@ -19,16 +18,20 @@ const AddMessage = ({secretData}) => {
   const handleSubmit = async e => {
     e.preventDefault();
     const msg = msgRef.current.value.trim();
-    await db.collection('messages').add({
-      msg,
-      secretID: id,
-      createdAt: now(),
-    });
+    if (msg) {
+      await db.collection('messages').add({
+        msg,
+        secretID: id,
+        createdAt: now(),
+      });
 
-    // increment msgCount for index page
-    await db.doc(`secrets/${id}`).update({
-      msgCount: fieldValue.increment(1),
-    });
+      // increment msgCount for index page
+      await db.doc(`secrets/${id}`).update({
+        msgCount: fieldValue.increment(1),
+      });
+    }
+
+    msgRef.current.value = '';
   };
 
   return (
