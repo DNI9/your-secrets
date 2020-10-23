@@ -32,7 +32,10 @@ export default function Home() {
         msgCount: 0,
         createdAt: now(),
       })
-      .then(doc => console.log('Added successfully'))
+      .then(() => {
+        secretRef.current.value = '';
+        setModalOpen(false);
+      })
       .catch(err => console.error(err.message));
   };
 
@@ -47,7 +50,7 @@ export default function Home() {
         <EmptyMessage message='No secrets here' />
       )}
       {loading && <Spinner />}
-      <div className='card-container'>
+      <div disabled={isOpen} className='card-container'>
         {docs &&
           docs.map(doc => (
             <SecretCard
