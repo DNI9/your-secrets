@@ -1,4 +1,6 @@
 import {db, fieldValue, now} from 'config/firebase';
+import {useAuth} from 'context/AuthContext';
+import {route} from 'next/dist/next-server/server/router';
 import Head from 'next/head';
 import {useRouter} from 'next/router';
 import {useRef} from 'react';
@@ -8,7 +10,11 @@ import {getAllDocs, getSingleDoc} from 'utils/getDocs';
 const AddMessage = ({secretData}) => {
   const router = useRouter();
   const msgRef = useRef();
-  const {username, id} = secretData;
+  const {currentUser} = useAuth();
+  const {username, id, uid} = secretData;
+
+  // user can't send message to his own secret
+  if (currentUser && uid === currentUser.uid) router.push('/');
 
   const handleSubmit = async e => {
     e.preventDefault();
