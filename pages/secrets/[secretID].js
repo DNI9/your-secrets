@@ -2,9 +2,10 @@ import EmptyMessage from 'components/EmptyMessage';
 import MessageCard from 'components/MessageCard';
 import Navbar from 'components/Navbar';
 import Head from 'next/head';
+import {getSingleDoc, getAllDocs} from 'utils/getDocs';
 
-const Secret = () => {
-  const isSecretEmpty = true; // TODO
+const Secret = ({secretData}) => {
+  const {messages} = secretData;
   return (
     <div>
       <Head>
@@ -12,21 +13,42 @@ const Secret = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar title='Messages' />
-      {!isSecretEmpty && <EmptyMessage message='No messages yet' />}
+      {messages.length === 0 && <EmptyMessage message='No messages yet' />}
       <div className='card-container'>
-        <MessageCard
-          message='Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
-              consequatur.'
-          timePassed='2hrs ago'
-        />
-
-        <MessageCard
-          message='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic consectetur rem iusto illo ad sit!'
-          timePassed='1hr ago'
-        />
+        {messages.map(msg => {
+          return <MessageCard message={msg} timePassed='2hrs ago' />;
+        })}
       </div>
     </div>
   );
 };
+
+export async function getStaticPaths() {
+  const docs = await getAllDocs('secrets');
+  const paths = docs.map(doc => {
+    return {
+      params: {
+        secretID: doc.id,
+      },
+    };
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({params}) {
+  const secretData = await getSingleDoc(params.secretID);
+  return {
+    props: {
+      secretData: {
+        ...secretData,
+        createdAt: `${secretData.createdAt.toDate()}`,
+      },
+    },
+  };
+}
 
 export default Secret;
