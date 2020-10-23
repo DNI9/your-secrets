@@ -2,10 +2,11 @@ import EmptyMessage from 'components/EmptyMessage';
 import MessageCard from 'components/MessageCard';
 import Navbar from 'components/Navbar';
 import Head from 'next/head';
-import {getSingleDoc, getAllDocs} from 'utils/getDocs';
+import {getAllDocs} from 'utils/getDocs';
 import {format} from 'timeago.js';
 import useMessages from 'hooks/useMessages';
 
+// this private route is to show messages for a secret in realtime
 const Secret = ({id}) => {
   const docs = useMessages(id);
   console.log(docs);

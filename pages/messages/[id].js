@@ -4,6 +4,7 @@ import {useRouter} from 'next/router';
 import {useRef} from 'react';
 import {getAllDocs, getSingleDoc} from 'utils/getDocs';
 
+// This route is to let other user create message
 const AddMessage = ({secretData}) => {
   const router = useRouter();
   const msgRef = useRef();
@@ -15,7 +16,7 @@ const AddMessage = ({secretData}) => {
     await db.collection('messages').add({
       msg,
       secretID: id,
-      createdAt: now,
+      createdAt: now(),
     });
 
     // increment msgCount for index page

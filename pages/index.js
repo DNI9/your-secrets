@@ -30,7 +30,7 @@ export default function Home() {
         secretName: secretRef.current.value.trim(),
         uid: currentUser.uid,
         msgCount: 0,
-        createdAt: now,
+        createdAt: now(),
       })
       .then(doc => console.log('Added successfully'))
       .catch(err => console.error(err.message));
