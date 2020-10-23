@@ -8,7 +8,7 @@ import {useRouter} from 'next/router';
 import {useRef, useState} from 'react';
 import Modal from 'components/Modal';
 import useFirestore from 'hooks/useFirestore';
-import {db, timestamp} from 'config/firebase';
+import {db, now} from 'config/firebase';
 import Spinner from 'components/Spinner';
 
 export default function Home() {
@@ -30,7 +30,7 @@ export default function Home() {
         secretName: secretRef.current.value.trim(),
         uid: currentUser.uid,
         messages: [],
-        createdAt: timestamp(),
+        createdAt: now,
       })
       .then(doc => console.log('Added successfully'))
       .catch(err => console.error(err.message));

@@ -3,6 +3,7 @@ import MessageCard from 'components/MessageCard';
 import Navbar from 'components/Navbar';
 import Head from 'next/head';
 import {getSingleDoc, getAllDocs} from 'utils/getDocs';
+import {format} from 'timeago.js';
 
 const Secret = ({secretData}) => {
   const {messages} = secretData;
@@ -15,8 +16,14 @@ const Secret = ({secretData}) => {
       <Navbar title='Messages' />
       {messages.length === 0 && <EmptyMessage message='No messages yet' />}
       <div className='card-container'>
-        {messages.map(msg => {
-          return <MessageCard message={msg} timePassed='2hrs ago' />;
+        {messages.map(({msg, createdAt}) => {
+          return (
+            <MessageCard
+              key={createdAt}
+              message={msg}
+              timePassed={format(createdAt)}
+            />
+          );
         })}
       </div>
     </div>
