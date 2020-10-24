@@ -1,19 +1,22 @@
+import Spinner from 'components/Spinner';
 import {db, fieldValue, now} from 'config/firebase';
 import {useAuth} from 'context/AuthContext';
 import useSingleDoc from 'hooks/useSingleDoc';
 import Head from 'next/head';
 import {useRouter} from 'next/router';
-import {useEffect, useRef} from 'react';
-import {getAllDocs, getSingleDoc} from 'utils/getDocs';
+import {useRef} from 'react';
+import {getAllDocs} from 'utils/getDocs';
 
 // This route is to let other user create message
 const AddMessage = ({id}) => {
   const router = useRouter();
   const msgRef = useRef();
   const {currentUser} = useAuth();
+
   const doc = useSingleDoc(id);
+  // null means the doc does not exists
   if (doc === null) router.push('/');
-  if (!doc) return <div>loading...</div>;
+  if (!doc) return <Spinner />;
   const {uid, username} = doc;
 
   // user can't send message to his own secret
