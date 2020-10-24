@@ -3,7 +3,7 @@ import {useRouter} from 'next/router';
 import Avatar from './Avatar';
 
 const Navbar = ({title, showUserAvatar}) => {
-  const {currentUser, logout, loading} = useAuth();
+  const {currentUser, logout} = useAuth();
   const router = useRouter();
 
   // TODO: handle logout for now, use short modal later

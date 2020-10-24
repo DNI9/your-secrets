@@ -10,9 +10,10 @@ import Modal from 'components/Modal';
 import useFirestore from 'hooks/useFirestore';
 import {db, now} from 'config/firebase';
 import Spinner from 'components/Spinner';
+import SnackBar from 'components/SnackBar';
 
 export default function Home() {
-  const {currentUser, loading} = useAuth();
+  const {currentUser, loading, alert} = useAuth();
   const router = useRouter();
   const [isOpen, setModalOpen] = useState(false);
   const secretRef = useRef();
@@ -85,6 +86,7 @@ export default function Home() {
           setModalOpen(true);
         }}
       />
+      {alert && <SnackBar />}
     </div>
   );
 }

@@ -10,6 +10,7 @@ export function useAuth() {
 export default function AuthProvider({children}) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [alert, setAlert] = useState(null);
 
   // Sign in with Google
   function signInWithGoogle() {
@@ -19,6 +20,14 @@ export default function AuthProvider({children}) {
   // Logout
   function logout() {
     return auth.signOut();
+  }
+
+  // to show snackbar
+  function showAlert(alertDetails, timeout) {
+    setAlert(alertDetails);
+    setTimeout(() => {
+      setAlert(null);
+    }, timeout);
   }
 
   useEffect(() => {
@@ -35,6 +44,8 @@ export default function AuthProvider({children}) {
     currentUser,
     logout,
     signInWithGoogle,
+    alert,
+    showAlert,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

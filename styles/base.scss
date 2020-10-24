@@ -50,3 +50,16 @@ button[disabled] {
   cursor: not-allowed;
   opacity: 0.7;
 }
+
+.semi-transparent-bg-with-icon {
+  margin-right: 0.8rem;
+  @include flex-center-screen;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  background: rgba(104, 104, 243, 0.22);
+
+  img {
+    height: 1rem;
+  }
+}

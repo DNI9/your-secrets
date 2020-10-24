@@ -148,3 +148,36 @@
     height: 5rem;
   }
 }
+
+// SNACKBAR
+.snackbar {
+  background: $bg-dark2;
+  height: 3rem;
+  max-width: 25rem;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 0.5rem;
+
+  &__msg {
+    width: 60%;
+    letter-spacing: 0.02rem;
+  }
+
+  &__action-text {
+    cursor: pointer;
+    margin-left: auto;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.05rem;
+    padding: 0.1rem 0.3rem;
+    background: $semi-transparent-primary;
+    color: $primary-color;
+  }
+}
