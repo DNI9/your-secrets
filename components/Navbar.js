@@ -1,4 +1,5 @@
 import {useAuth} from 'context/AuthContext';
+import Link from 'next/link';
 import {useRouter} from 'next/router';
 import Avatar from './Avatar';
 
@@ -16,7 +17,9 @@ const Navbar = ({title, showUserAvatar}) => {
   };
   return (
     <div className='navbar'>
-      <div className='navbar__title'>{title || 'Secrets'}</div>
+      <Link href='/about'>
+        <div className='navbar__title'>{title || 'Secrets'}</div>
+      </Link>
       {showUserAvatar && (
         <div className='navbar__user-avatar' onClick={handleLogout}>
           <Avatar photoURL={currentUser?.photoURL} />
