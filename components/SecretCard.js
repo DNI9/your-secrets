@@ -1,6 +1,7 @@
 import {useAuth} from 'context/AuthContext';
 import {motion} from 'framer-motion';
 import Link from 'next/link';
+import CopyToClipboard from 'utils/copyToClipboard';
 import {deleteSecret} from 'utils/deleteDoc';
 
 const SecretCard = ({name, noOfMessages, id}) => {
@@ -22,7 +23,14 @@ const SecretCard = ({name, noOfMessages, id}) => {
         </div>
       </Link>
       <div className='card__right-icon'>
-        <img src='share.svg' alt='share icon' />
+        <img
+          src='share.svg'
+          alt='share icon'
+          onClick={() => {
+            CopyToClipboard(`messages/${id}`);
+            showAlert({msg: 'Copied URL to clipboard'});
+          }}
+        />
         <img src='delete.svg' alt='delete icon' onClick={handleDelete} />
       </div>
     </motion.div>
