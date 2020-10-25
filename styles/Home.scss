@@ -14,3 +14,18 @@
   margin: 0 auto;
   padding: 0.5rem 1rem;
 }
+
+#add-secret {
+  input {
+    background: #2a2a42;
+    color: $light;
+
+    &::placeholder {
+      color: $light;
+      opacity: 0.5;
+    }
+  }
+  button {
+    background: linear-gradient(98.25deg, #6a6aff -12.26%, #3f69ff 108.73%);
+  }
+}
