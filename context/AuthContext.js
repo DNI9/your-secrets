@@ -23,7 +23,7 @@ export default function AuthProvider({children}) {
   }
 
   // to show snackbar
-  function showAlert(alertDetails, timeout) {
+  function showAlert(alertDetails, timeout = 3000) {
     setAlert(alertDetails);
     setTimeout(() => {
       setAlert(null);
