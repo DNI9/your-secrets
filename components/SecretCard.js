@@ -10,6 +10,7 @@ const SecretCard = ({name, noOfMessages, id}) => {
     deleteSecret(id);
     showAlert({msg: 'Deleted secret'});
   };
+  if (name.length > 16) name = name.slice(0, 16) + '...';
 
   return (
     <motion.div layout transition={{duration: 0.5}} className='card'>
