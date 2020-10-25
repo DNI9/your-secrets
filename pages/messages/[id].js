@@ -1,6 +1,8 @@
+import SnackBar from 'components/SnackBar';
 import Spinner from 'components/Spinner';
 import {db, fieldValue, now} from 'config/firebase';
 import {useAuth} from 'context/AuthContext';
+import {motion} from 'framer-motion';
 import useSingleDoc from 'hooks/useSingleDoc';
 import Head from 'next/head';
 import {useRouter} from 'next/router';
@@ -11,7 +13,7 @@ import {getAllDocs} from 'utils/getDocs';
 const AddMessage = ({id}) => {
   const router = useRouter();
   const msgRef = useRef();
-  const {currentUser} = useAuth();
+  const {currentUser, showAlert, alert} = useAuth();
 
   const {doc} = useSingleDoc(id);
   if (!doc) return <Spinner />;
@@ -29,6 +31,7 @@ const AddMessage = ({id}) => {
         secretID: id,
         createdAt: now(),
       });
+      showAlert({msg: 'Ah yes, message sent'});
 
       // increment msgCount for index page
       await db.doc(`secrets/${id}`).update({
@@ -54,6 +57,7 @@ const AddMessage = ({id}) => {
         <div className='message__form'>
           <form onSubmit={handleSubmit}>
             <textarea
+              autoFocus
               ref={msgRef}
               placeholder='Write your message here'
               name='message'
@@ -69,6 +73,7 @@ const AddMessage = ({id}) => {
           </form>
         </div>
       </div>
+      {alert && <SnackBar />}
     </>
   );
 };
