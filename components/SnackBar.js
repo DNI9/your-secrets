@@ -1,11 +1,15 @@
 import {useAuth} from 'context/AuthContext';
+import {motion} from 'framer-motion';
 const SnackBar = () => {
   const {
     alert: {msg, actionText, onActionClick, icon},
   } = useAuth();
 
   return (
-    <div className='snackbar'>
+    <motion.div
+      initial={{opacity: 0, y: '20px'}}
+      animate={{opacity: 1, y: 0}}
+      className='snackbar'>
       {icon && (
         <div className='snackbar__icon semi-transparent-bg-with-icon'>
           <img src={icon} />
@@ -17,7 +21,7 @@ const SnackBar = () => {
           {actionText.toUpperCase() || 'CLICK'}
         </p>
       )}
-    </div>
+    </motion.div>
   );
 };
 
