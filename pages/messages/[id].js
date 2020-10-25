@@ -59,13 +59,14 @@ const AddMessage = ({id}) => {
               name='message'
               id='message'
               cols='50'
-              rows='10'></textarea>
+              rows='10'
+            />
+            <div className='fixed-footer'>
+              Wanna create your own?{' '}
+              <span onClick={() => router.push('/login')}>yes?</span>
+            </div>
             <button type='submit'>Submit</button>
           </form>
-        </div>
-        <div className='fixed-footer'>
-          Wanna create your own?{' '}
-          <span onClick={() => router.push('/login')}>yes?</span>
         </div>
       </div>
     </>

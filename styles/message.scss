@@ -36,6 +36,20 @@
       }
     }
 
+    .fixed-footer {
+      span {
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 1.2rem;
+        letter-spacing: 0.05rem;
+        color: $primary-color;
+      }
+    }
+
+    textarea:focus + .fixed-footer {
+      display: none;
+    }
+
     button {
       font-size: 1rem;
       font-weight: 500;
@@ -44,16 +58,6 @@
       background: linear-gradient(98.25deg, #6a6aff -12.26%, #3f69ff 108.73%);
       border-radius: 3px;
       padding: 0.8rem 1.8rem;
-    }
-  }
-
-  .fixed-footer {
-    span {
-      cursor: pointer;
-      font-weight: 500;
-      font-size: 1.2rem;
-      letter-spacing: 0.05rem;
-      color: $primary-color;
     }
   }
 }
