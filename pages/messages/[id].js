@@ -13,9 +13,7 @@ const AddMessage = ({id}) => {
   const msgRef = useRef();
   const {currentUser} = useAuth();
 
-  const doc = useSingleDoc(id);
-  // null means the doc does not exists
-  if (doc === null) router.push('/');
+  const {doc} = useSingleDoc(id);
   if (!doc) return <Spinner />;
   const {uid, username} = doc;
 

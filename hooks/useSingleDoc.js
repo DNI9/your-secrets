@@ -10,12 +10,10 @@ const useSingleDoc = id => {
       .then(doc => {
         if (doc.exists) {
           setDoc({...doc.data(), id: doc.id});
-        } else {
-          setDoc(null);
         }
       });
   }, [id]);
-  return doc;
+  return {doc};
 };
 
 export default useSingleDoc;
