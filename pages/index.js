@@ -13,7 +13,7 @@ import Spinner from 'components/Spinner';
 import SnackBar from 'components/SnackBar';
 
 export default function Home() {
-  const {currentUser, loading, alert} = useAuth();
+  const {currentUser, loading, alert, showAlert} = useAuth();
   const router = useRouter();
   const [isOpen, setModalOpen] = useState(false);
   const secretRef = useRef();
@@ -38,7 +38,10 @@ export default function Home() {
       } catch (err) {
         console.error(err.message);
       }
+    } else {
+      showAlert({msg: 'oh noe, you forgot to type?'});
     }
+
     secretRef.current.value = '';
   };
 
@@ -69,7 +72,7 @@ export default function Home() {
         onClose={() => {
           setModalOpen(false);
         }}>
-        <form onSubmit={handleSubmit}>
+        <form id='add-secret' onSubmit={handleSubmit}>
           <input
             ref={secretRef}
             type='text'
@@ -77,7 +80,7 @@ export default function Home() {
             id='secret_name'
             placeholder='Write name of the secret'
           />
-          <button type='submit'>Create</button>
+          <button type='submit'>Add</button>
         </form>
       </Modal>
       <FAB

@@ -69,7 +69,7 @@ const AddMessage = ({id}) => {
               Wanna create your own?{' '}
               <span onClick={() => router.push('/login')}>yes?</span>
             </div>
-            <button type='submit'>Submit</button>
+            <button type='submit'>Send</button>
           </form>
         </div>
       </div>
