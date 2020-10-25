@@ -34,10 +34,10 @@ export default function Home() {
           msgCount: 0,
           createdAt: now(),
         });
+        setModalOpen(false);
       } catch (err) {
         console.error(err.message);
       }
-      setModalOpen(false);
     }
     secretRef.current.value = '';
   };

@@ -1,7 +1,15 @@
+import {useAuth} from 'context/AuthContext';
 import {motion} from 'framer-motion';
 import Link from 'next/link';
+import {deleteSecret} from 'utils/deleteDoc';
 
 const SecretCard = ({name, noOfMessages, id}) => {
+  const {showAlert} = useAuth();
+  const handleDelete = () => {
+    deleteSecret(id);
+    showAlert({msg: 'Deleted secret'});
+  };
+
   return (
     <motion.div layout transition={{duration: 0.5}} className='card'>
       <div className='card__icon'>
@@ -14,7 +22,8 @@ const SecretCard = ({name, noOfMessages, id}) => {
         </div>
       </Link>
       <div className='card__right-icon'>
-        <img src='share.svg' />
+        <img src='share.svg' alt='share icon' />
+        <img src='delete.svg' alt='delete icon' onClick={handleDelete} />
       </div>
     </motion.div>
   );
