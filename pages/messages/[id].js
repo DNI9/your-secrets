@@ -47,6 +47,7 @@ const AddMessage = ({id}) => {
       <Head>
         <title>Add a message</title>
         <link rel='icon' href='/favicon.ico' />
+		<meta name="description" content="Send messages anonymously to a friend."/>
       </Head>
 
       <div className='message'>
